@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h2>Welcome, <span id="username">User</span></h2>
+            <button id="logout-button">Logout</button>
+        </header>
+
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="clients.html">Clients</a></li>
+                    <li><a href="locations.html">Locations</a></li>
+                    <li><a href="admin.html" id="admin-link" style="display: none;">Admin</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <h3>Dashboard Content Goes Here</h3>
+            <p>Welcome to the dashboard. Use the navigation on the left to access different sections.</p>
+        </main>
+    </div>
+    
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navigation">
+        <!-- Links will be populated by navigation.js -->
+    </nav>
+
+    <h2>Admin Dashboard</h2>
+
+    <div>
+        <h3>Add New User</h3>
+        <form id="add-user-form">
+            <label for="user-email">Email:</label>
+            <input type="email" id="user-email" name="email" required><br><br>
+            <label for="user-password">Password:</label>
+            <input type="password" id="user-password" name="password" required><br><br>
+            <label for="user-role">Role:</label>
+            <select id="user-role" name="role" required>
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+            </select><br><br>
+            <button type="submit">Add User</button>
+        </form>
+        <div id="user-error" class="error"></div>
+    </div>
+
+    <h3>Users List</h3>
+    <table id="users-table" border="1">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- User data will be dynamically populated here -->
+        </tbody>
+    </table>
+
+    <a href="dashboard.html">Back to Main Dashboard</a>
+
+    <!-- Scripts -->
+    <script src="js/admin.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+</html>

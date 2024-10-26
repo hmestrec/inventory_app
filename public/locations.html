@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locations</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <h2>Locations</h2>
+    <div>
+        <h3>Add or Update Location</h3>
+        <form id="location-form">
+            <input type="hidden" id="location-id" name="location_id">
+            <label for="location-name">Location Name:</label>
+            <input type="text" id="location-name" name="location_name" required><br><br>
+            <label for="address">Address:</label>
+            <input type="text" id="location-address" name="address" required><br><br>
+            <label for="city">City:</label>
+            <input type="text" id="location-city" name="city" required><br><br>
+            <label for="state">State:</label>
+            <input type="text" id="location-state" name="state" required><br><br>
+            <label for="zip-code">Zip Code:</label>
+            <input type="text" id="location-zip" name="zip_code" required><br><br>
+            <button type="submit">Save Location</button>
+        </form>
+        <div id="location-error" style="color: red;"></div>
+    </div>
+
+    <table id="locations-table" border="1">
+        <thead>
+            <tr>
+                <th>Location Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip Code</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Location data will be dynamically populated here -->
+        </tbody>
+    </table>
+
+    <a href="dashboard.html">Back to Dashboard</a>
+    <script src="js/locations.js"></script>
+</body>
+</html>
