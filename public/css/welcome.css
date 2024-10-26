@@ -138,6 +138,22 @@ header h1 {
     color: #f0f0f0; /* Light gray for readability */
 }
 
+/* CSS to position language buttons at the bottom left corner */
+.language-switch {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.language-switch button {
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .main-container {

@@ -357,6 +357,19 @@ tr.editing td input {
     padding: 15px 20px; /* Maintain same padding to avoid different hover widths */
 }
 
+/* CSS to position language buttons at the bottom left corner */
+.language-switch {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    gap: 10px;
+}
 
+.language-switch button {
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+}
 
 
