@@ -1,21 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Elements selection
     const clientsTableBody = document.querySelector('#clients-table tbody');
     const clientError = document.getElementById('client-error');
-    const clientForm = document.getElementById('client-form'); // Assuming there's a form with this ID for adding clients
+    const clientForm = document.getElementById('client-form');
+    const adminLink = document.getElementById('admin-link');
 
-    // Helper function to set error messages
-    function setClientErrorMessage(message) {
-        if (clientError) {
-            clientError.textContent = message;
-        } else {
-            console.error('Error element not found in the DOM.');
+    // Get user information from session storage
+    const userRole = sessionStorage.getItem('userRole');
+
+    // Show the admin link only if the user is an admin
+    if (userRole === 'admin' && adminLink) {
+        adminLink.style.display = 'inline-block';
+    }
+
+
+    // Utility function to set message with different colors for success and error
+    function setMessage(element, message, isSuccess) {
+        if (element) {
+            element.textContent = message;
+            element.style.color = isSuccess ? 'green' : 'red';
         }
     }
 
     // Fetch and display clients
     async function fetchClients() {
         clientsTableBody.innerHTML = ''; // Clear table body
-        setClientErrorMessage('');
+        setMessage(clientError, '', false);
 
         try {
             const response = await fetch('http://localhost:3000/clients');
@@ -61,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
         } catch (error) {
-            setClientErrorMessage('Error fetching clients. Please try again.');
+            setMessage(clientError, 'Error fetching clients. Please try again.', false);
         }
     }
 
@@ -71,19 +81,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const saveButton = row.querySelector('.save-client-btn');
 
         if (isEditing) {
+            row.classList.add('editing'); // Add the 'editing' class to change background color
             row.querySelectorAll('td[contenteditable]').forEach(cell => {
                 cell.contentEditable = true;
-                cell.style.backgroundColor = '#f0f8ff'; // Highlight editable cells
+                cell.style.backgroundColor = '#444'; // Darker background while editing
+                cell.style.color = '#fff'; // White text for better contrast
             });
-            editButton.style.display = 'none';
-            saveButton.style.display = 'inline-block';
+            if (editButton) editButton.style.display = 'none';
+            if (saveButton) saveButton.style.display = 'inline-block';
         } else {
+            row.classList.remove('editing'); // Remove the 'editing' class to reset background color
             row.querySelectorAll('td[contenteditable]').forEach(cell => {
                 cell.contentEditable = false;
-                cell.style.backgroundColor = ''; // Remove highlight
+                cell.style.backgroundColor = ''; // Reset background color
+                cell.style.color = ''; // Reset text color
             });
-            editButton.style.display = 'inline-block';
-            saveButton.style.display = 'none';
+            if (editButton) editButton.style.display = 'inline-block';
+            if (saveButton) saveButton.style.display = 'none';
         }
     }
 
@@ -104,10 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!response.ok) throw new Error('Failed to save client.');
 
-            setClientErrorMessage('Client updated successfully');
+            setMessage(clientError, 'Client updated successfully', true);
             toggleEditClientRow(row, false);
         } catch (error) {
-            setClientErrorMessage(`Error saving client: ${error.message}`);
+            setMessage(clientError, `Error saving client: ${error.message}`, false);
         }
     }
 
@@ -117,38 +131,40 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`http://localhost:3000/clients/${clientId}`, { method: 'DELETE' });
             if (!response.ok) throw new Error('Failed to delete client.');
 
-            setClientErrorMessage('Client deleted successfully');
+            setMessage(clientError, 'Client deleted successfully', true);
             fetchClients(); // Reload client list after deletion
         } catch (error) {
-            setClientErrorMessage(`Error deleting client: ${error.message}`);
+            setMessage(clientError, `Error deleting client: ${error.message}`, false);
         }
     }
 
     // Add new client function
-    clientForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
+    if (clientForm) {
+        clientForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-        const client_name = document.getElementById('client-name').value.trim();
-        const address = document.getElementById('address').value.trim();
-        const contact_email = document.getElementById('contact-email').value.trim();
-        const phone_number = document.getElementById('phone-number').value.trim();
+            const client_name = document.getElementById('client-name').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const contact_email = document.getElementById('contact-email').value.trim();
+            const phone_number = document.getElementById('phone-number').value.trim();
 
-        try {
-            const response = await fetch('http://localhost:3000/clients', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ client_name, address, contact_email, phone_number })
-            });
+            try {
+                const response = await fetch('http://localhost:3000/clients', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ client_name, address, contact_email, phone_number })
+                });
 
-            if (!response.ok) throw new Error('Failed to add new client.');
+                if (!response.ok) throw new Error('Failed to add new client.');
 
-            clientForm.reset(); // Clear form
-            setClientErrorMessage('Client added successfully');
-            fetchClients(); // Reload clients list
-        } catch (error) {
-            setClientErrorMessage(`Error adding client: ${error.message}`);
-        }
-    });
+                clientForm.reset(); // Clear form
+                setMessage(clientError, 'Client added successfully', true);
+                fetchClients(); // Reload clients list
+            } catch (error) {
+                setMessage(clientError, `Error adding client: ${error.message}`, false);
+            }
+        });
+    }
 
     // Initialize fetch on page load
     fetchClients();

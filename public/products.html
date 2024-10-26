@@ -4,16 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
-    <link rel="stylesheet" href="css/products.css">
+    <link rel="stylesheet" href="css/tab.css">
 </head>
 <body>
-    <div class="container">
+    <!-- Navigation -->
+    <nav class="navigation">
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="products.html" class="active">Products</a></li>
+            <li><a href="clients.html">Clients</a></li>
+            <li><a href="locations.html">Locations</a></li>
+            <li><a href="admin.html" id="admin-link" style="display: none;">Admin</a></li>
+        </ul>
+    </nav>
+
+    <div class="container main-content">
         <header>
             <h2>Products</h2>
-            <a href="dashboard.html" class="back-link">Back to Dashboard</a>
         </header>
 
         <section class="form-section">
+            <h3>Add New Product</h3>
             <form id="product-form" class="product-form">
                 <input type="hidden" id="product-id" name="product_id">
                 <div class="input-group">
@@ -60,7 +71,7 @@
                 <span class="close">&times;</span>
                 <h3>Update Quantity</h3>
                 <input type="number" id="modal-quantity-input" min="0" required>
-                <button id="modal-update-btn" class="btn">Update</button>
+                <button id="modal-update-btn" class="btn primary">Update</button>
             </div>
         </div>
     </div>

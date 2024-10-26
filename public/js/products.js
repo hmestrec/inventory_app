@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const productForm = document.getElementById('product-form');
     const productError = document.getElementById('product-error');
     const productsTableBody = document.querySelector('#products-table tbody');
-    
+    const adminLink = document.getElementById('admin-link');
+
     // Quantity Update Modal Elements
     const updateQuantityModal = document.getElementById('update-quantity-modal');
     const modalQuantityInput = document.getElementById('modal-quantity-input');
@@ -11,15 +12,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentProductId = null; // To hold the ID of the product being updated
 
+
+    // Get user information from session storage
+    const userRole = sessionStorage.getItem('userRole');
+
+    // Show the admin link only if the user is an admin
+    if (userRole === 'admin' && adminLink) {
+        adminLink.style.display = 'inline-block';
+    }
+
+    // Utility function to set message with different colors for success and error
+    function setMessage(element, message, isSuccess) {
+        element.textContent = message;
+        element.style.color = isSuccess ? 'green' : 'red';
+    }
+
     // Submit form for adding/updating products
     productForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const id = document.getElementById('product-id').value;
-        const name = document.getElementById('product-name').value;
-        const description = document.getElementById('product-description').value;
-        const price = document.getElementById('product-price').value;
-        const quantity = document.getElementById('product-quantity').value;
+        const name = document.getElementById('product-name').value.trim();
+        const description = document.getElementById('product-description').value.trim();
+        const price = document.getElementById('product-price').value.trim();
+        const quantity = document.getElementById('product-quantity').value.trim();
 
         const url = id ? `http://localhost:3000/products/${id}` : 'http://localhost:3000/products';
         const method = id ? 'PUT' : 'POST';
@@ -36,12 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(responseData.message || 'Failed to process the request');
             }
 
-            productError.textContent = ''; // Clear any error messages
+            setMessage(productError, 'Product saved successfully', true); // Success message
             productForm.reset();  // Reset form on success
             fetchProducts();  // Reload product list after add/update
 
         } catch (error) {
-            productError.textContent = error.message;
+            setMessage(productError, error.message, false); // Error message
         }
     });
 
@@ -89,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
         } catch (error) {
-            productError.textContent = 'Error fetching products. Please try again.';
+            setMessage(productError, 'Error fetching products. Please try again.', false);
         }
     }
 
@@ -106,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update product quantity
     modalUpdateBtn.addEventListener('click', async () => {
-        const newQuantity = modalQuantityInput.value;
+        const newQuantity = modalQuantityInput.value.trim();
         if (!newQuantity) return;
 
         try {
@@ -123,11 +139,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(responseData.message || 'Failed to update quantity');
             }
 
-            productError.textContent = 'Quantity updated successfully';
+            setMessage(productError, 'Quantity updated successfully', true);
             hideUpdateQuantityModal();
             fetchProducts();  // Reload products list after updating
         } catch (error) {
-            productError.textContent = `Error updating quantity: ${error.message}`;
+            setMessage(productError, `Error updating quantity: ${error.message}`, false);
         }
     });
 
@@ -150,10 +166,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(responseData.message || 'Failed to delete the product');
             }
 
-            productError.textContent = 'Product deleted successfully';
+            setMessage(productError, 'Product deleted successfully', true);
             fetchProducts(); // Reload product list after deletion
         } catch (error) {
-            productError.textContent = `Error deleting product: ${error.message}`;
+            setMessage(productError, `Error deleting product: ${error.message}`, false);
         }
     }
 

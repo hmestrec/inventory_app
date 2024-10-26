@@ -3,10 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const userError = document.getElementById('user-error');
     const addUserForm = document.getElementById('add-user-form');
 
-    // Helper function to set error messages
-    function setUserErrorMessage(message) {
+    // Helper function to set success or error messages
+    function setUserMessage(message, isSuccess) {
         if (userError) {
             userError.textContent = message;
+            userError.style.color = isSuccess ? 'green' : 'red';
         } else {
             console.error('Error element not found in the DOM.');
         }
@@ -15,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fetch and display users
     async function fetchUsers() {
         usersTableBody.innerHTML = ''; // Clear table body
-        setUserErrorMessage('');
+        setUserMessage('', false);
 
         try {
             const response = await fetch('http://localhost:3000/users');
@@ -59,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
         } catch (error) {
-            setUserErrorMessage('Error fetching users. Please try again.');
+            setUserMessage('Error fetching users. Please try again.', false);
         }
     }
 
@@ -69,16 +70,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const saveButton = row.querySelector('.save-user-btn');
 
         if (isEditing) {
+            row.classList.add('editing'); // Add the 'editing' class to change background color
             row.querySelectorAll('td[contenteditable]').forEach(cell => {
                 cell.contentEditable = true;
-                cell.style.backgroundColor = '#f0f8ff'; // Highlight editable cells
+                cell.style.backgroundColor = '#444'; // Set darker background while editing
+                cell.style.color = '#fff'; // Set text color to white for better contrast
             });
             editButton.style.display = 'none';
             saveButton.style.display = 'inline-block';
         } else {
+            row.classList.remove('editing'); // Remove the 'editing' class to reset background color
             row.querySelectorAll('td[contenteditable]').forEach(cell => {
                 cell.contentEditable = false;
-                cell.style.backgroundColor = ''; // Remove highlight
+                cell.style.backgroundColor = ''; // Reset background color
+                cell.style.color = ''; // Reset text color
             });
             editButton.style.display = 'inline-block';
             saveButton.style.display = 'none';
@@ -100,25 +105,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!response.ok) throw new Error(`Failed to save user. Status: ${response.status}`);
             
-            setUserErrorMessage('User updated successfully');
+            setUserMessage('User updated successfully', true);
             toggleEditUserRow(row, false);
         } catch (error) {
-            setUserErrorMessage(`Error saving user: ${error.message}`);
+            setUserMessage(`Error saving user: ${error.message}`, false);
         }
     }
 
-    // Delete user function
-    async function deleteUser(userId) {
-        try {
-            const response = await fetch(`http://localhost:3000/users/${userId}`, { method: 'DELETE' });
-            if (!response.ok) throw new Error('Failed to delete user.');
+// Delete user function
+async function deleteUser(userId) {
+    try {
+        console.log(`Attempting to delete user with ID: ${userId}`); // Log user ID for debugging
 
-            setUserErrorMessage('User deleted successfully');
-            fetchUsers(); // Reload user list after deletion
-        } catch (error) {
-            setUserErrorMessage(`Error deleting user: ${error.message}`);
+        const response = await fetch(`http://localhost:3000/users/${userId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                // If your backend requires authentication, add the Authorization header here:
+                // 'Authorization': 'Bearer YOUR_TOKEN_HERE'
+            },
+        });
+
+        if (!response.ok) {
+            const responseText = await response.text(); // Get the response text for more details
+            console.error(`Failed to delete user. Status Code: ${response.status}, Response: ${responseText}`);
+            throw new Error('Failed to delete user.');
         }
+
+        console.log('User deleted successfully'); // Log success for debugging
+        setUserMessage('User deleted successfully', true);
+        await fetchUsers(); // Reload user list after deletion
+    } catch (error) {
+        console.error(`Error deleting user: ${error.message}`); // Log the full error details
+        setUserMessage(`Error deleting user: ${error.message}`, false);
     }
+}
+
+
 
     // Add new user function
     addUserForm.addEventListener('submit', async (e) => {
@@ -138,10 +161,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error('Failed to add new user.');
 
             addUserForm.reset(); // Clear form
-            setUserErrorMessage('User added successfully');
+            setUserMessage('User added successfully', true);
             fetchUsers(); // Reload users list
         } catch (error) {
-            setUserErrorMessage(`Error adding user: ${error.message}`);
+            setUserMessage(`Error adding user: ${error.message}`, false);
         }
     });
 

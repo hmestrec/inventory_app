@@ -1,0 +1,140 @@
+/* General Reset and Body Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(-45deg, #1a1a1a, #333, #444, #1a1a1a);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    color: #f0f0f0; /* Light gray text for contrast */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Background Animation Keyframes */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Registration Container Styling */
+.registration-container {
+    background: rgba(38, 38, 38, 0.95); /* Darker gray with transparency */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    width: 90%;
+    animation: fadeIn 2s ease;
+    text-align: center;
+}
+
+/* Header for Registration Box */
+.registration-container h2 {
+    font-size: 2rem;
+    color: #ff9800; /* Bright orange for headings */
+    margin-bottom: 20px;
+}
+
+/* Input Group Styling */
+label {
+    display: block;
+    font-weight: bold;
+    color: #f0f0f0; /* Light gray text */
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #ff9800; /* Orange border */
+    background-color: #1a1a1a; /* Dark input field */
+    color: #f0f0f0; /* Light text */
+    margin-bottom: 20px;
+}
+
+/* Button Styling */
+button {
+    display: inline-block;
+    background-color: #ff9800; /* Bright orange */
+    color: #1a1a1a; /* Black text for contrast */
+    padding: 12px 25px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 30px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    width: 100%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #e68900; /* Darker orange on hover */
+    transform: translateY(-3px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Error Message Styling */
+.error {
+    color: #ff4c4c; /* Red for errors */
+    margin-top: 15px;
+}
+
+/* Back Link Styling */
+a {
+    display: inline-block;
+    margin-top: 20px;
+    color: #ff9800; /* Bright orange */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #e68900; /* Darker shade of orange on hover */
+}
+
+/* Animation Keyframes for Fade-in Effect */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .registration-container {
+        padding: 20px;
+    }
+
+    .registration-container h2 {
+        font-size: 1.5rem;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}

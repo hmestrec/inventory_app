@@ -1,7 +1,7 @@
 // Import required modules
 // vault server -dev &
 //export VAULT_ADDR='http://127.0.0.1:8200'
-//export VAULT_TOKEN='hvs.hWAqSvcGUusX0oTx48cSmRaW'
+//export VAULT_TOKEN='hvs.BdvmRWybW9v5a5bht8jNBTFk'
 //vault kv put secret/mysql_db_config username=newuser password=Laila@12345678
 //mysql -u newuser -p -h localhost
 

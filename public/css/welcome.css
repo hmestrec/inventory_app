@@ -1,60 +1,179 @@
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
 }
 
+/* Body Styling with Dynamic Background */
 body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(-45deg, #1a1a1a, #333, #444, #1a1a1a);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    color: #f0f0f0; /* Light gray text for contrast */
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background-color: #f0f2f5;
+    height: 100vh;
 }
 
+/* Background Animation Keyframes */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Main Container Styling */
 .main-container {
     text-align: center;
-    background: #fff;
-    padding: 40px;
+    background-color: rgba(38, 38, 38, 0.9); /* Darker gray with transparency */
+    padding: 40px 20px;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.5);
+    max-width: 1000px;
     width: 90%;
+    animation: fadeIn 2s ease;
 }
 
+/* Header Styling */
 header h1 {
-    font-size: 28px;
-    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #ff9800; /* Bright orange for heading */
+}
+
+.tagline {
+    font-size: 1.2rem;
     margin-bottom: 30px;
 }
 
+/* Links Container */
 .links-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
+    margin-top: 30px;
 }
 
+/* Button Styling */
 .btn {
+    display: inline-block;
+    background-color: #ff9800; /* Bright orange */
+    color: #1a1a1a; /* Black text for contrast */
+    padding: 12px 25px;
     text-decoration: none;
-    color: #fff;
-    background-color: #007bff;
-    padding: 15px 30px;
-    border-radius: 8px;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    font-size: 1.2rem;
     font-weight: bold;
-}
-
-.btn.secondary {
-    background-color: #28a745;
+    border-radius: 30px;
+    transition: all 0.3s ease-in-out;
+    margin: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .btn:hover {
-    background-color: #0056b3;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background-color: #e68900; /* Darker orange on hover */
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Secondary Button Styling */
+.btn.secondary {
+    background-color: #4caf50; /* Green for emphasis */
 }
 
 .btn.secondary:hover {
-    background-color: #218838;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background-color: #388e3c; /* Darker green on hover */
+}
+
+/* Features Section Styling */
+.info-section {
+    margin-bottom: 40px;
+}
+
+.info-section h2 {
+    font-size: 2rem;
+    color: #4caf50; /* Green to show growth and progress */
+    margin-bottom: 20px;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.feature {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.feature img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+}
+
+.feature h3 {
+    color: #ff9800; /* Bright orange */
+    margin-bottom: 10px;
+}
+
+.feature p {
+    font-size: 1rem;
+    color: #f0f0f0; /* Light gray for readability */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 20px 10px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .tagline {
+        font-size: 1rem;
+    }
+
+    .features {
+        flex-direction: column;
+    }
+
+    .feature {
+        width: 100%;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
