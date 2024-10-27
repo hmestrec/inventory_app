@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setUserMessage('', false);
 
         try {
-            const response = await fetch('http://localhost:3000/users');
+            const response = await fetch('https://sheltered-ocean-88352-000ba16da54d.herokuapp.com/users');
             if (!response.ok) throw new Error('Failed to fetch users.');
 
             const users = await response.json();
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const role = row.children[1].textContent.trim();
 
         try {
-            const response = await fetch(`http://localhost:3000/users/${userId}`, {
+            const response = await fetch(`https://sheltered-ocean-88352-000ba16da54d.herokuapp.com/users/${userId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, role })
@@ -112,36 +112,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-// Delete user function
-async function deleteUser(userId) {
-    try {
-        console.log(`Attempting to delete user with ID: ${userId}`); // Log user ID for debugging
+    // Delete user function
+    async function deleteUser(userId) {
+        try {
+            console.log(`Attempting to delete user with ID: ${userId}`); // Log user ID for debugging
 
-        const response = await fetch(`http://localhost:3000/users/${userId}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                // If your backend requires authentication, add the Authorization header here:
-                // 'Authorization': 'Bearer YOUR_TOKEN_HERE'
-            },
-        });
+            const response = await fetch(`https://sheltered-ocean-88352-000ba16da54d.herokuapp.com/users/${userId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
 
-        if (!response.ok) {
-            const responseText = await response.text(); // Get the response text for more details
-            console.error(`Failed to delete user. Status Code: ${response.status}, Response: ${responseText}`);
-            throw new Error('Failed to delete user.');
+            if (!response.ok) {
+                const responseText = await response.text(); // Get the response text for more details
+                console.error(`Failed to delete user. Status Code: ${response.status}, Response: ${responseText}`);
+                throw new Error('Failed to delete user.');
+            }
+
+            console.log('User deleted successfully'); // Log success for debugging
+            setUserMessage('User deleted successfully', true);
+            await fetchUsers(); // Reload user list after deletion
+        } catch (error) {
+            console.error(`Error deleting user: ${error.message}`); // Log the full error details
+            setUserMessage(`Error deleting user: ${error.message}`, false);
         }
-
-        console.log('User deleted successfully'); // Log success for debugging
-        setUserMessage('User deleted successfully', true);
-        await fetchUsers(); // Reload user list after deletion
-    } catch (error) {
-        console.error(`Error deleting user: ${error.message}`); // Log the full error details
-        setUserMessage(`Error deleting user: ${error.message}`, false);
     }
-}
-
-
 
     // Add new user function
     addUserForm.addEventListener('submit', async (e) => {
@@ -152,7 +148,7 @@ async function deleteUser(userId) {
         const role = document.getElementById('user-role').value;
 
         try {
-            const response = await fetch('http://localhost:3000/users', {
+            const response = await fetch('https://sheltered-ocean-88352-000ba16da54d.herokuapp.com/users', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password, role })

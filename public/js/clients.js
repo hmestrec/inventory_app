@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         adminLink.style.display = 'inline-block';
     }
 
-
     // Utility function to set message with different colors for success and error
     function setMessage(element, message, isSuccess) {
         if (element) {
@@ -28,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setMessage(clientError, '', false);
 
         try {
-            const response = await fetch('http://localhost:3000/clients');
+            const response = await fetch('https://sheltered-ocean-88352-000ba16da54d.herokuapp.com/clients');
             if (!response.ok) throw new Error('Failed to fetch clients.');
 
             const clients = await response.json();
@@ -110,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const phone_number = row.children[3].textContent.trim();
 
         try {
-            const response = await fetch(`http://localhost:3000/clients/${clientId}`, {
+            const response = await fetch(`https://sheltered-ocean-88352-000ba16da54d.herokuapp.com/clients/${clientId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ client_name, address, contact_email, phone_number })
@@ -128,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Delete client function
     async function deleteClient(clientId) {
         try {
-            const response = await fetch(`http://localhost:3000/clients/${clientId}`, { method: 'DELETE' });
+            const response = await fetch(`https://sheltered-ocean-88352-000ba16da54d.herokuapp.com/clients/${clientId}`, { method: 'DELETE' });
             if (!response.ok) throw new Error('Failed to delete client.');
 
             setMessage(clientError, 'Client deleted successfully', true);
@@ -149,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const phone_number = document.getElementById('phone-number').value.trim();
 
             try {
-                const response = await fetch('http://localhost:3000/clients', {
+                const response = await fetch('https://sheltered-ocean-88352-000ba16da54d.herokuapp.com/clients', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ client_name, address, contact_email, phone_number })
