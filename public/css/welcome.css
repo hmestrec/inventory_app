@@ -162,8 +162,8 @@ header h1 {
     }
 
     .main-container {
-        padding: calc(env(safe-area-inset-top) + 20px) 10px 20px 10px; /* Top padding for safe area */
-        box-sizing: border-box;
+        display: block;
+
     }
 
     header h1 {
