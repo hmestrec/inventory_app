@@ -6,11 +6,6 @@ const bcrypt = require('bcryptjs');
 const path = require('path');
 const { body, validationResult } = require('express-validator');
 const cors = require('cors');
-const vault = require('node-vault')({
-  apiVersion: 'v1',
-  endpoint: process.env.VAULT_ADDR || 'http://127.0.0.1:8300',
-  token: process.env.VAULT_TOKEN || 'hvs.CAESINxkpvGb-tk6KAXPNHm0Ah9JT9a5EAmknLRHyKaEVKUoGh4KHGh2cy5hMkRUbjdKamhEU0ZOWUFxem1DemEzdHk',
-});
 
 // Load environment variables from .env file
 dotenv.config();
@@ -19,58 +14,35 @@ dotenv.config();
 const app = express();
 
 // Enable CORS
-app.use(cors());
-
-// Middleware
-app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Fetch credentials from Vault and create a database connection
-let connection;
-
-// Enable CORS
 app.use(cors({
   origin: 'http://127.0.0.1:5500',
   methods: 'GET,POST,PUT,DELETE',
 }));
 
+// Middleware
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
-async function getDbCredentials() {
-  try {
-    const secret = await vault.read('secret/data/mysql_db_config');
-    const username = secret.data.data.username;
-    const password = secret.data.data.password;
+// Create a database connection directly from environment variables
+const mysql = require('mysql2');
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+});
 
-    console.log('Fetched credentials from Vault:', username, password);
-
-    // Establish a database connection using the credentials fetched from Vault
-    connection = require('mysql2').createConnection({
-      host: process.env.DB_HOST,
-      user: username,
-      password: password,
-      database: process.env.DB_NAME
-    });
-
-    connection.connect((err) => {
-      if (err) {
-        console.error('Error connecting to MySQL:', err);
-      } else {
-        console.log('Connected to MySQL using credentials from Vault');
-      }
-    });
-  } catch (error) {
-    console.error('Error fetching credentials from Vault:', error);
+connection.connect((err) => {
+  if (err) {
+    console.error('Error connecting to MySQL:', err);
+  } else {
+    console.log('Connected to MySQL');
   }
-}
-
-
-// Initialize the connection when the server starts
-getDbCredentials();
+});
 
 // Define isAdmin function for role-based access control
 const isAdmin = (req, res, next) => {
   const userRole = 'admin';  // Hard-code this for testing purposes
-  
   if (userRole === 'admin') {
     next();  // User is admin, proceed
   } else {
