@@ -156,19 +156,16 @@ header h1 {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    html, body {
-        overflow-y: auto; /* Ensure vertical scrolling is enabled */
-        min-height: 100vh; /* Full viewport height */
-    }
-
+    /* Adjusting main container to avoid top cut-off */
     .main-container {
-        display: block;
-
+        padding: 20px 10px;
+        margin-top: 60px; /* Extra margin at the top to avoid cut-off */
     }
 
+    /* Adjust header font sizes for smaller screens */
     header h1 {
-        font-size: 1.8rem; /* Smaller font size for narrow screens */
-        margin-top: 20px; /* Adjust for a bit of extra space */
+        font-size: 1.8rem;
+        margin-top: 20px;
     }
 
     .tagline {
@@ -189,7 +186,35 @@ header h1 {
         padding: 10px 20px;
         font-size: 1rem;
     }
+
+    /* Update navigation to avoid overlay on small screens */
+    .navigation {
+        position: relative; /* Change from fixed to relative */
+        width: 100%; /* Full width on smaller screens */
+        height: auto; /* Allow it to adjust with content */
+    }
+
+    .navigation ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Center navigation items */
+    }
+
+    .navigation li {
+        margin: 5px;
+    }
+
+    .navigation a {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
+
+    /* Hide any checkmark or decorative elements on mobile */
+    .navigation a.active::after {
+        display: none;
+    }
 }
+
 
 
 /* Animation Keyframes */
