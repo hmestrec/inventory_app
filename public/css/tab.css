@@ -310,11 +310,11 @@ input:focus::placeholder {
     /* Sidebar as horizontal navigation bar */
     .navigation {
         position: fixed;
-        width: auto;
+        width: 100%;
         height: auto;
         top: 0;
         left: 0;
-        display:inline;
+        display:block;
         flex-direction: row;
         justify-content: space-around;
         padding: 10px 0;
@@ -324,7 +324,7 @@ input:focus::placeholder {
     }
 
     .navigation ul {
-        display: flex;
+        display: block;
         width: auto;
         justify-content: space-around;
     }
