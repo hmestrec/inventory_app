@@ -7,15 +7,7 @@
     <link rel="stylesheet" href="css/tab.css">
 </head>
 <body>
-    <div class="main-content">
-                <header>
-                    <h2>Welcome, <span id="username">User</span></h2>
-                </header>
-                </div>
-                <div class="logout-container">
-                    <button id="logout-button" class="logout-button">Logout</button>
-                </div>
-            </div>
+    <div class="main-container">
         <aside class="navigation">
             <nav>
                 <ul>
@@ -29,9 +21,18 @@
         </aside>
 
         <main class="main-content">
-            <h3>Dashboard Content Goes Here</h3>
-            <p>Welcome to the dashboard. Use the navigation on the left to access different sections.</p>
+            <header>
+                <h2>Welcome, <span id="username">User</span></h2>
+            </header>
+            <section class="dashboard-content">
+                <h3>Dashboard Content Goes Here</h3>
+                <p>Welcome to the dashboard. Use the navigation on the left to access different sections.</p>
+            </section>
         </main>
+
+        <div class="logout-container">
+            <button id="logout-button" class="logout-button">Logout</button>
+        </div>
     </div>
     <script src="js/dashboard.js"></script>
 </body>
