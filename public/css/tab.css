@@ -316,7 +316,8 @@ input:focus::placeholder {
         left: 0;
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: flex-start;
+        overflow-x: auto; /* Allow horizontal scroll */
         padding: 10px 0;
         z-index: 10;
         background-color: #333;
@@ -325,21 +326,19 @@ input:focus::placeholder {
 
     .navigation ul {
         display: flex;
-        width: 100%;
-        justify-content: space-between; /* Adjust spacing for fit */
+        width: max-content;
     }
 
     .navigation li {
-        margin: 0;
-        flex: 1; /* Equal space for each tab */
+        flex: 1 0 auto; /* Prevent shrinking of tabs */
         text-align: center;
     }
 
     .navigation a {
-        padding: 10px 0;
+        padding: 10px 15px;
         font-size: 0.9rem;
         text-align: center;
-        border-left: none; /* Remove border on hover */
+        border-left: none;
     }
 
     /* Remove checkmark for smaller screens */
@@ -349,7 +348,7 @@ input:focus::placeholder {
 
     /* Adjust main content to move below navigation bar */
     .main-content {
-        margin: 70px 0 0 0; /* Adjust for navigation bar height */
+        margin-top: 60px; /* Adjust for navigation bar height */
         width: 100%;
         padding: 15px;
     }
@@ -363,7 +362,6 @@ input:focus::placeholder {
         width: 100%;
     }
 
-    /* Table adjustments */
     table {
         width: 100%;
         overflow-x: auto;
@@ -373,7 +371,7 @@ input:focus::placeholder {
     th, td {
         font-size: 0.9rem;
         padding: 10px;
-        white-space: nowrap; /* Prevent text wrapping */
+        white-space: nowrap;
     }
 
     /* Adjust buttons */
@@ -382,4 +380,5 @@ input:focus::placeholder {
         padding: 8px 10px;
     }
 }
+
 
