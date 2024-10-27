@@ -158,7 +158,9 @@ header h1 {
 @media (max-width: 768px) {
     /* Adjusting main container to avoid top cut-off */
     .main-container {
-        padding: 20px 10px;
+        display:block;
+        flex-direction: row;
+        justify-content: center;
         justify-self: center;
         /*margin-top: 300px; /* Extra margin at the top to avoid cut-off */
     }
