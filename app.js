@@ -55,33 +55,41 @@ const isAdmin = (req, res, next) => {
 
 // LOGIN ROUTE
 app.post('/login', (req, res) => {
-    const { email, password } = req.body;
-    const query = 'SELECT * FROM new_users WHERE email = ?';
+  console.log("Received login request with email:", req.body.email);
 
-    pool.query(query, [email], (err, results) => {
-        if (err) {
-            console.error('Database error during login:', err);
-            return res.status(500).json({ error: 'Internal server error - Database query failed' });
-        }
-        if (results.length > 0) {
-            const user = results[0];
-            bcrypt.compare(password, user.password, (err, isMatch) => {
-                if (err) {
-                    return res.status(500).json({ error: 'Internal server error - Password comparison failed' });
-                }
-                if (isMatch) {
-                    res.status(200).json({
-                        message: 'Login successful',
-                        user: { email: user.email, role: user.role }
-                    });
-                } else {
-                    res.status(401).json({ message: 'Invalid email or password' });
-                }
-            });
-        } else {
-            res.status(401).json({ message: 'Invalid email or password' });
-        }
-    });
+  const { email, password } = req.body;
+  const query = 'SELECT * FROM new_users WHERE email = ?';
+
+  // Enhanced error logging to catch connection issues
+  pool.query(query, [email], (err, results) => {
+      if (err) {
+          console.error('Database error during login:', err.code, err.message);  // Detailed error log
+          return res.status(500).json({ error: 'Internal server error - Database query failed' });
+      }
+      
+      if (results.length > 0) {
+          const user = results[0];
+          bcrypt.compare(password, user.password, (err, isMatch) => {
+              if (err) {
+                  console.error('Error comparing passwords:', err);
+                  return res.status(500).json({ error: 'Internal server error - Password comparison failed' });
+              }
+              if (isMatch) {
+                  console.log("Login successful for email:", email);
+                  res.status(200).json({
+                      message: 'Login successful',
+                      user: { email: user.email, role: user.role }
+                  });
+              } else {
+                  console.log("Password mismatch for email:", email);
+                  res.status(401).json({ message: 'Invalid email or password' });
+              }
+          });
+      } else {
+          console.log("No user found with email:", email);
+          res.status(401).json({ message: 'Invalid email or password' });
+      }
+  });
 });
 
 // REGISTER ROUTE
