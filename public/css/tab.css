@@ -310,7 +310,7 @@ input:focus::placeholder {
     /* Sidebar as horizontal navigation bar */
     .navigation {
         position: fixed;
-        width: 100%;
+        width: auto;
         height: auto;
         top: 0;
         left: 0;
@@ -325,7 +325,7 @@ input:focus::placeholder {
 
     .navigation ul {
         display: flex;
-        width: 100%;
+        width: auto;
         justify-content: space-around;
     }
 
@@ -342,9 +342,9 @@ input:focus::placeholder {
         text-align: center;
     }
 
-        /* Remove checkmark for smaller screens */
-        .navigation a.active::after {
-        content: none;
+    /* Remove checkmark for smaller screens */
+    .navigation a.active::after {
+    content: none;
     }
 
     /* Adjust main content to move below navigation bar */
