@@ -7,6 +7,8 @@ const path = require('path');
 const { body, validationResult } = require('express-validator');
 const cors = require('cors');
 const mysql = require('mysql2');
+const dbUrl = process.env.DATABASE_URL || 'mysql://fa6fzbu1xdx1q7t4:jpgea9rmkbgxjkar@edo4plet5mhv93s3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/xlnv5cnxxgxjbfqi';
+
 
 // Load environment variables from .env file
 dotenv.config();
