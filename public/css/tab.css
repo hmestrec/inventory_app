@@ -372,21 +372,4 @@ tr.editing td input {
     cursor: pointer;
 }
 
-/* Header Styling */
-.header {
-    color: #ffffff;
-    padding: 10px 20px;
-    background-color: #333;
-    display: flex;
-    justify-content: center; /* Center content horizontally */
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.username-container {
-    font-size: 1.5em;
-    color: #ff9800; /* Orange for user welcome message */
-    text-align: center;
-    font-weight: bold;
-}
 
