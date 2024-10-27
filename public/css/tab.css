@@ -63,26 +63,13 @@ body {
     animation: slideIn 0.5s ease;
 }
 
-.header {
-    color: #ffffff;
-    padding: 20px;
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center;
-    height: 60px; /* Adjust as needed for better spacing */
-    width: 100%;
-    background-color: #333; /* Dark gray for the header background */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
-}
-
 /* Common Form and Table Styles */
-.header h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #ffa500; /* Orange color for consistency with the theme */
+h2 {
+    margin-bottom: 20px;
+    color: #ff9800;
+    font-weight: 600;
     text-transform: uppercase;
-    font-weight: bold;
-    animation: fadeIn 0.5s ease; /* Smooth fade-in effect */
+    letter-spacing: 1px;
 }
 
 form {
