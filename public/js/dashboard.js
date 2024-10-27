@@ -12,14 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("User Email from session storage:", userEmail);
     console.log("User Role from session storage:", userRole);
 
-    // Handle redirection if user is not logged in
+    // Redirect to login page if the user is not logged in
     if (!userEmail) {
         console.log("User email not found, redirecting to login...");
         window.location.href = 'login.html';
         return;
     }
 
-    // If user is logged in, set the username
+    // Display the username in the welcome message
     if (userEmail) {
         usernameElement.textContent = userEmail;
         console.log("User email set in the welcome message");
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Admin link is now visible");
     }
 
-    // Handle logout
+    // Handle logout by clearing session storage and redirecting to login
     logoutButton.addEventListener('click', () => {
         console.log("Logging out...");
         sessionStorage.clear(); // Clear user data from session storage
