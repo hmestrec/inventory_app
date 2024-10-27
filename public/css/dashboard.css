@@ -82,3 +82,19 @@ p {
     font-size: 1em;
     color: #bbbbbb;
 }
+
+.header {
+    color: #ffffff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px; /* Adjust as needed for better spacing */
+    width: 100%;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
