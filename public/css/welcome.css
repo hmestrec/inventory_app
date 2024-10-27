@@ -156,28 +156,33 @@ header h1 {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    html, body {
+        overflow-y: auto; /* Ensure vertical scrolling is enabled */
+        min-height: 100vh; /* Full viewport height */
+    }
+
     .main-container {
-        padding: 80px 10px; /* Added top padding */
+        padding: calc(env(safe-area-inset-top) + 20px) 10px 20px 10px; /* Top padding for safe area */
+        box-sizing: border-box;
     }
 
     header h1 {
-        font-size: 2rem;
-        margin-top: 10px; /* Small top margin to avoid overlap */
+        font-size: 1.8rem; /* Smaller font size for narrow screens */
+        margin-top: 20px; /* Adjust for a bit of extra space */
     }
 
     .tagline {
         font-size: 1rem;
-        padding-top: 5px; /* Extra padding for clarity */
     }
 
     .features {
         flex-direction: column;
-        align-items: center; /* Center features for smaller screens */
+        align-items: center;
     }
 
     .feature {
         width: 100%;
-        margin-bottom: 15px; /* Add space between features */
+        margin-bottom: 15px;
     }
 
     .btn {
@@ -185,6 +190,8 @@ header h1 {
         font-size: 1rem;
     }
 }
+
+
 /* Animation Keyframes */
 @keyframes fadeIn {
     0% {
