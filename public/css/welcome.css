@@ -157,7 +157,7 @@ header h1 {
 /* Responsive Design */
 @media (max-width: 768px) {
     .main-container {
-        padding: 40px 10px; /* Added top padding */
+        padding: 80px 10px; /* Added top padding */
     }
 
     header h1 {
