@@ -1,94 +1,173 @@
-/* dashboard.css */
-
-body {
-    font-family: Arial, sans-serif;
-    color: #e0e0e0;
+/* General Reset and Body Styles */
+* {
     margin: 0;
-    background-color: #1e1e1e;
-}
-
-.dashboard-container {
-    display: flex;
-}
-
-.sidebar {
-    background-color: #2a2a2a;
-    color: #ffffff;
-    width: 200px;
-    min-height: 100vh;
-    padding: 20px;
+    padding: 0;
     box-sizing: border-box;
 }
 
-.sidebar h2 {
-    color: #ff8c00;
-    font-size: 1.2em;
-    margin-bottom: 20px;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a; /* Black background */
+    color: #f0f0f0; /* Light gray text for contrast */
+    display: flex;
 }
 
-.sidebar nav ul {
+/* Sidebar Navigation */
+.sidebar {
+    width: 200px;
+    background-color: #333; /* Dark gray */
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+}
+
+.sidebar ul {
     list-style: none;
     padding: 0;
 }
 
-.sidebar nav ul li {
-    margin: 15px 0;
+.sidebar ul li {
+    margin: 20px 0;
 }
 
-.sidebar nav ul li a {
-    color: #bbbbbb;
+.sidebar ul li a {
+    color: #ff9800; /* Bright orange for links */
     text-decoration: none;
-    font-size: 1em;
-    display: block;
-    padding: 10px;
-    border-radius: 4px;
-    transition: background 0.3s;
-}
-
-.sidebar nav ul li a.active,
-.sidebar nav ul li a:hover {
-    background-color: #444444;
-    color: #ffffff;
-}
-
-.dashboard-content {
-    flex: 1;
-    padding: 30px;
-    background-color: #292929;
-}
-
-#logout-button {
-    background-color: #e74c3c;
-    color: #ffffff;
-    border: none;
     padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background 0.3s;
+    display: block;
+    transition: background-color 0.3s ease;
 }
 
-#logout-button:hover {
-    background-color: #c0392b;
+.sidebar ul li a:hover {
+    background-color: #555; /* Slightly lighter gray on hover */
 }
 
-p {
-    font-size: 1em;
-    color: #bbbbbb;
+.sidebar ul li a.active {
+    background-color: #444; /* Slightly darker gray for active links */
 }
 
+/* Main Content Area */
+.dashboard-content {
+    margin-left: 220px; /* Space for sidebar */
+    padding: 20px;
+    width: calc(100% - 220px);
+}
+
+/* Header Styling */
 .header {
     color: #ffffff;
     padding: 10px 20px;
+    background-color: #333;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 60px; /* Adjust as needed for better spacing */
-    width: 100%;
 }
 
-.header-content {
-    display: flex;
-    align-items: center;
+.header h1 {
+    color: #ff9800; /* Orange for header */
+}
+
+.username-container {
+    font-size: 1.2em;
+    color: #ff9800;
+}
+
+/* Logout Button Styling */
+.logout-button {
+    background-color: #ff4c4c;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #cc0000;
+}
+
+/* Dashboard Message and Content Styling */
+.dashboard-content h2 {
+    color: #ff9800; /* Orange for headings */
+    margin-bottom: 15px;
+}
+
+.dashboard-content p {
+    font-size: 1em;
+    color: #bbbbbb;
+}
+
+/* Admin Link Visibility */
+#admin-link {
+    display: none;
+}
+
+#admin-link.active {
+    display: block;
+}
+
+/* Button Styling */
+button {
+    padding: 10px 15px;
+    background-color: #ff9800; /* Orange button */
+    color: #1a1a1a; /* Black text */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #e68900; /* Darker orange on hover */
+}
+
+/* Table Styles for Dashboard Content */
+table {
     width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background-color: #262626; /* Darker gray */
+    color: #f0f0f0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+th {
+    background-color: #333;
+    color: #ff9800; /* Orange for table header */
+}
+
+tr:hover {
+    background-color: #333;
+}
+
+/* Button Styling for Actions in Table */
+.btn {
+    padding: 6px 12px;
+    background-color: #ff9800; /* Orange for action buttons */
+    color: #1a1a1a;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.btn:hover {
+    background-color: #e68900;
+}
+
+.btn.danger {
+    background-color: #ff4c4c; /* Red for delete button */
+}
+
+.btn.danger:hover {
+    background-color: #cc0000;
 }
