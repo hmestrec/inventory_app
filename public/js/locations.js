@@ -12,13 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
         adminLink.style.display = 'inline-block';
     }
 
-    
     // Fetch and display locations
     async function fetchLocations() {
         locationsTableBody.innerHTML = ''; // Clear table body
 
         try {
-            const response = await fetch('http://localhost:3000/locations');
+            const response = await fetch('https://sheltered-ocean-88352-000ba16da54d.herokuapp.com/locations');
             if (!response.ok) throw new Error('Failed to fetch locations.');
 
             const locations = await response.json();
@@ -108,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const zip_code = row.children[4].textContent.trim();
 
         try {
-            const response = await fetch(`http://localhost:3000/locations/${locationId}`, {
+            const response = await fetch(`https://sheltered-ocean-88352-000ba16da54d.herokuapp.com/locations/${locationId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ location_name, address, city, state, zip_code })
@@ -126,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Delete location function
     async function deleteLocation(locationId) {
         try {
-            const response = await fetch(`http://localhost:3000/locations/${locationId}`, { method: 'DELETE' });
+            const response = await fetch(`https://sheltered-ocean-88352-000ba16da54d.herokuapp.com/locations/${locationId}`, { method: 'DELETE' });
             if (!response.ok) throw new Error('Failed to delete location.');
 
             setMessage(locationError, 'Location deleted successfully', true);
@@ -147,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const zip_code = document.getElementById('location-zip').value.trim();
 
         try {
-            const response = await fetch('http://localhost:3000/locations', {
+            const response = await fetch('https://sheltered-ocean-88352-000ba16da54d.herokuapp.com/locations', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ location_name, address, city, state, zip_code })
