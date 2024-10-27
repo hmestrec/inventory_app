@@ -333,11 +333,18 @@ input:focus::placeholder {
         margin: 0;
     }
 
+
+
     .navigation a {
         width: auto;
         padding: 10px 15px;
         font-size: 0.9rem;
         text-align: center;
+    }
+
+        /* Remove checkmark for smaller screens */
+        .navigation a.active::after {
+        content: none;
     }
 
     /* Adjust main content to move below navigation bar */
