@@ -39,6 +39,7 @@ body {
 }
 
 .navigation a {
+    width: 200px;
     color: #ff9800;
     text-decoration: none;
     padding: 10px 20px;
