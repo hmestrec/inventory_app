@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentProductId = null; // To hold the ID of the product being updated
 
-
     // Get user information from session storage
     const userRole = sessionStorage.getItem('userRole');
 
@@ -37,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const price = document.getElementById('product-price').value.trim();
         const quantity = document.getElementById('product-quantity').value.trim();
 
-        const url = id ? `http://localhost:3000/products/${id}` : 'http://localhost:3000/products';
+        const url = id ? `https://sheltered-ocean-88352-000ba16da54d.herokuapp.com/products/${id}` : 'https://sheltered-ocean-88352-000ba16da54d.herokuapp.com/products';
         const method = id ? 'PUT' : 'POST';
 
         try {
@@ -66,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         productsTableBody.innerHTML = '';  // Clear the table body before loading new data
 
         try {
-            const response = await fetch('http://localhost:3000/products');
+            const response = await fetch('https://sheltered-ocean-88352-000ba16da54d.herokuapp.com/products');
             if (!response.ok) throw new Error(`Failed to fetch products. Status: ${response.status}`);
 
             const products = await response.json();
@@ -128,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             console.log(`Updating product ID: ${currentProductId} with quantity: ${newQuantity}`);
             
-            const response = await fetch(`http://localhost:3000/products/${currentProductId}/quantity`, {
+            const response = await fetch(`https://sheltered-ocean-88352-000ba16da54d.herokuapp.com/products/${currentProductId}/quantity`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ quantity: newQuantity })
@@ -160,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Delete product function
     async function deleteProduct(id) {
         try {
-            const response = await fetch(`http://localhost:3000/products/${id}`, { method: 'DELETE' });
+            const response = await fetch(`https://sheltered-ocean-88352-000ba16da54d.herokuapp.com/products/${id}`, { method: 'DELETE' });
             if (!response.ok) {
                 const responseData = await response.json();
                 throw new Error(responseData.message || 'Failed to delete the product');
