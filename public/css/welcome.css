@@ -157,23 +157,27 @@ header h1 {
 /* Responsive Design */
 @media (max-width: 768px) {
     .main-container {
-        padding: 20px 10px;
+        padding: 40px 10px; /* Added top padding */
     }
 
     header h1 {
         font-size: 2rem;
+        margin-top: 10px; /* Small top margin to avoid overlap */
     }
 
     .tagline {
         font-size: 1rem;
+        padding-top: 5px; /* Extra padding for clarity */
     }
 
     .features {
         flex-direction: column;
+        align-items: center; /* Center features for smaller screens */
     }
 
     .feature {
         width: 100%;
+        margin-bottom: 15px; /* Add space between features */
     }
 
     .btn {
@@ -181,7 +185,6 @@ header h1 {
         font-size: 1rem;
     }
 }
-
 /* Animation Keyframes */
 @keyframes fadeIn {
     0% {
