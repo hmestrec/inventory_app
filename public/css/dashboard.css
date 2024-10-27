@@ -1,63 +1,29 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+/* dashboard.css */
 
 body {
+    font-family: Arial, sans-serif;
+    color: #e0e0e0;
+    margin: 0;
+    background-color: #1e1e1e;
+}
+
+.dashboard-container {
     display: flex;
-    height: 100vh;
-    background-color: #f0f2f5;
-}
-
-.container {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-}
-
-header {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: calc(100% - 200px);
-    height: 60px;
-    background-color: #007bff;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    z-index: 1000;
-}
-
-header h2 {
-    font-size: 18px;
-}
-
-#logout-button {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-#logout-button:hover {
-    background-color: #e60000;
 }
 
 .sidebar {
+    background-color: #2a2a2a;
+    color: #ffffff;
     width: 200px;
-    background-color: #343a40;
-    color: #fff;
-    height: 100vh;
-    padding-top: 60px;
-    position: fixed;
-    left: 0;
-    top: 0;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.sidebar h2 {
+    color: #ff8c00;
+    font-size: 1.2em;
+    margin-bottom: 20px;
 }
 
 .sidebar nav ul {
@@ -70,31 +36,49 @@ header h2 {
 }
 
 .sidebar nav ul li a {
-    color: #ffffff;
+    color: #bbbbbb;
     text-decoration: none;
+    font-size: 1em;
     display: block;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.sidebar nav ul li a.active,
+.sidebar nav ul li a:hover {
+    background-color: #444444;
+    color: #ffffff;
+}
+
+.dashboard-content {
+    flex: 1;
+    padding: 30px;
+    background-color: #292929;
+}
+
+#logout-button {
+    background-color: #e74c3c;
+    color: #ffffff;
+    border: none;
     padding: 10px 20px;
     border-radius: 4px;
-    transition: background-color 0.3s ease;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s;
 }
 
-.sidebar nav ul li a:hover {
-    background-color: #495057;
+#logout-button:hover {
+    background-color: #c0392b;
 }
 
-.content {
-    margin-left: 220px;
-    padding: 80px 20px 20px;
-    width: calc(100% - 220px);
-    overflow-y: auto;
-}
-
-.content h3 {
-    font-size: 24px;
+h2 {
+    color: #ffffff;
+    font-size: 1.5em;
     margin-bottom: 10px;
 }
 
-.content p {
-    font-size: 16px;
-    line-height: 1.5;
+p {
+    font-size: 1em;
+    color: #bbbbbb;
 }
