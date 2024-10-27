@@ -316,8 +316,7 @@ input:focus::placeholder {
         left: 0;
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
-        overflow-x: auto; /* Allow horizontal scroll */
+        justify-content: space-around;
         padding: 10px 0;
         z-index: 10;
         background-color: #333;
@@ -326,29 +325,24 @@ input:focus::placeholder {
 
     .navigation ul {
         display: flex;
-        width: max-content;
+        width: 100%;
+        justify-content: space-around;
     }
 
     .navigation li {
-        flex: 1 0 auto; /* Prevent shrinking of tabs */
-        text-align: center;
+        margin: 0;
     }
 
     .navigation a {
+        width: auto;
         padding: 10px 15px;
         font-size: 0.9rem;
         text-align: center;
-        border-left: none;
-    }
-
-    /* Remove checkmark for smaller screens */
-    .navigation a.active::after {
-        content: none;
     }
 
     /* Adjust main content to move below navigation bar */
     .main-content {
-        margin-top: 60px; /* Adjust for navigation bar height */
+        margin: 70px 0 0 0; /* Adjust for navigation bar height */
         width: 100%;
         padding: 15px;
     }
@@ -362,6 +356,7 @@ input:focus::placeholder {
         width: 100%;
     }
 
+    /* Table adjustments */
     table {
         width: 100%;
         overflow-x: auto;
@@ -371,7 +366,7 @@ input:focus::placeholder {
     th, td {
         font-size: 0.9rem;
         padding: 10px;
-        white-space: nowrap;
+        white-space: nowrap; /* Prevent text wrapping */
     }
 
     /* Adjust buttons */
@@ -380,5 +375,4 @@ input:focus::placeholder {
         padding: 8px 10px;
     }
 }
-
 
