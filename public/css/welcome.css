@@ -159,7 +159,7 @@ header h1 {
     /* Adjusting main container to avoid top cut-off */
     .main-container {
         padding: 20px 10px;
-        margin-top: 60px; /* Extra margin at the top to avoid cut-off */
+        margin-top: 90px; /* Extra margin at the top to avoid cut-off */
     }
 
     /* Adjust header font sizes for smaller screens */
