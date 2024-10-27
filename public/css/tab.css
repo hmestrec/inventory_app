@@ -314,7 +314,7 @@ input:focus::placeholder {
         height: auto;
         top: 0;
         left: 0;
-        display:block;
+        display:inline-flex;
         flex-direction: row;
         justify-content: space-around;
         padding: 10px 0;
@@ -324,7 +324,7 @@ input:focus::placeholder {
     }
 
     .navigation ul {
-        display: block;
+        display: inline-flex;
         width: auto;
         justify-content: space-around;
     }
