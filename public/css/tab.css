@@ -314,7 +314,7 @@ input:focus::placeholder {
         height: auto;
         top: 0;
         left: 0;
-        display: flex;
+        display:inline;
         flex-direction: row;
         justify-content: space-around;
         padding: 10px 0;
