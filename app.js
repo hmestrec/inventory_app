@@ -7,8 +7,6 @@ const path = require('path');
 const { body, validationResult } = require('express-validator');
 const cors = require('cors');
 const mysql = require('mysql2');
-const dbUrl = process.env.DATABASE_URL || 'mysql://fa6fzbu1xdx1q7t4:jpgea9rmkbgxjkar@edo4plet5mhv93s3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/xlnv5cnxxgxjbfqi';
-
 
 // Load environment variables from .env file
 dotenv.config();
@@ -34,27 +32,28 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Create a MySQL connection pool
-const mysql = require('mysql2');
+// Parse the JAWSDB_URL into MySQL configuration
+const dbUrl = process.env.JAWSDB_URL;
+const url = new URL(dbUrl);
+
 const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: url.hostname,
+  user: url.username,
+  password: url.password,
+  database: url.pathname.slice(1),
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
 });
 
-
 // Define isAdmin function for role-based access control
 const isAdmin = (req, res, next) => {
-    const userRole = 'admin';  // Hard-coded for testing purposes
-    if (userRole === 'admin') {
-        next();  // User is admin, proceed
-    } else {
-        res.status(403).json({ message: 'Access denied: Admins only' });
-    }
+  const userRole = 'admin';  // Hard-code this for testing purposes
+  if (userRole === 'admin') {
+      next();  // User is admin, proceed
+  } else {
+      res.status(403).json({ message: 'Access denied: Admins only' });
+  }
 };
 
 // LOGIN ROUTE
@@ -64,13 +63,11 @@ app.post('/login', (req, res) => {
   const { email, password } = req.body;
   const query = 'SELECT * FROM new_users WHERE email = ?';
 
-  // Enhanced error logging to catch connection issues
   pool.query(query, [email], (err, results) => {
       if (err) {
-          console.error('Database error during login:', err.code, err.message);  // Detailed error log
+          console.error('Database error during login:', err);
           return res.status(500).json({ error: 'Internal server error - Database query failed' });
       }
-      
       if (results.length > 0) {
           const user = results[0];
           bcrypt.compare(password, user.password, (err, isMatch) => {
@@ -364,5 +361,5 @@ app.delete('/locations/:id', (req, res) => {
 // Server setup
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
