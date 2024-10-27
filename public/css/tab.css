@@ -306,17 +306,21 @@ input:focus::placeholder {
 }
 
 /* Responsive Styles */
-/* Responsive Styles */
 @media (max-width: 768px) {
-    /* Make the sidebar horizontal at the top */
+    /* Sidebar becomes a horizontal navigation bar at the top */
     .navigation {
-        position: relative;
+        position: fixed;
         width: 100%;
         height: auto;
+        top: 0;
+        left: 0;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         padding: 10px 0;
+        z-index: 10;
+        background-color: #333;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
     }
 
     .navigation ul {
@@ -333,13 +337,15 @@ input:focus::placeholder {
         width: auto;
         padding: 10px 15px;
         font-size: 0.9rem;
+        text-align: center;
     }
 
-    /* Adjust main content */
+    /* Adjust main content to move below the navigation bar */
     .main-content {
-        margin: 0;
+        margin: 70px 0 0 0; /* Adjust margin-top to create space for the navigation bar */
         width: 100%;
         padding: 15px;
+        overflow-x: auto;
     }
 
     /* Header and form adjustments */
