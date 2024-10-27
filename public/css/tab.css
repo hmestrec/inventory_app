@@ -306,19 +306,43 @@ input:focus::placeholder {
 }
 
 /* Responsive Styles */
+/* Responsive Styles */
 @media (max-width: 768px) {
+    /* Make the sidebar horizontal at the top */
     .navigation {
-        position: static;
+        position: relative;
         width: 100%;
         height: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 10px 0;
     }
 
-    .main-content {
-        margin-left: 0;
+    .navigation ul {
+        display: flex;
         width: 100%;
-        padding: 10px;
+        justify-content: space-around;
     }
 
+    .navigation li {
+        margin: 0;
+    }
+
+    .navigation a {
+        width: auto;
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+
+    /* Adjust main content */
+    .main-content {
+        margin: 0;
+        width: 100%;
+        padding: 15px;
+    }
+
+    /* Header and form adjustments */
     h2 {
         font-size: 1.2rem;
     }
@@ -332,8 +356,10 @@ input:focus::placeholder {
         padding: 10px;
     }
 
+    /* Adjust buttons */
     .logout-button, .language-switch {
         bottom: 10px;
         padding: 8px 10px;
     }
 }
+
