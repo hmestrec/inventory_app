@@ -307,7 +307,7 @@ input:focus::placeholder {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-    /* Sidebar becomes a horizontal navigation bar at the top */
+    /* Sidebar as horizontal navigation bar */
     .navigation {
         position: fixed;
         width: 100%;
@@ -340,12 +340,11 @@ input:focus::placeholder {
         text-align: center;
     }
 
-    /* Adjust main content to move below the navigation bar */
+    /* Adjust main content to move below navigation bar */
     .main-content {
-        margin: 70px 0 0 0; /* Adjust margin-top to create space for the navigation bar */
+        margin: 70px 0 0 0; /* Adjust for navigation bar height */
         width: 100%;
         padding: 15px;
-        overflow-x: auto;
     }
 
     /* Header and form adjustments */
@@ -357,9 +356,17 @@ input:focus::placeholder {
         width: 100%;
     }
 
-    table, th, td {
+    /* Table adjustments */
+    table {
+        width: 100%;
+        overflow-x: auto;
+        display: block;
+    }
+
+    th, td {
         font-size: 0.9rem;
         padding: 10px;
+        white-space: nowrap; /* Prevent text wrapping */
     }
 
     /* Adjust buttons */
