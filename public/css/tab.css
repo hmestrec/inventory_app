@@ -11,7 +11,6 @@ body {
     color: #f0f0f0;
     display: flex;
     animation: fadeIn 0.5s ease;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 /* Navigation Bar Styling */
@@ -91,13 +90,13 @@ form {
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     margin-bottom: 30px;
-    width: 100%; /* Full width on smaller screens */
+    width: 900px;
     animation: fadeIn 0.5s ease;
 }
 
 .input-group {
     margin-bottom: 15px;
-    width: 100%; /* Full width for input fields */
+    width: 800px;
 }
 
 label {
@@ -305,18 +304,16 @@ input:focus::placeholder {
     color: #58ac28;
 }
 
-/* Responsive Styling for Smaller Screens */
+/* Responsive Styles */
 @media (max-width: 768px) {
     .navigation {
-        position: relative;
-        width: 100%;
+        width: 100px;
+        padding-top: 10px;
         height: auto;
     }
 
-    .navigation ul {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
+    .navigation:hover {
+        width: 120px;
     }
 
     .navigation a {
@@ -327,25 +324,24 @@ input:focus::placeholder {
     .main-content {
         margin-left: 0;
         width: 100%;
-        padding: 15px;
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 1.2rem;
     }
 
     form, .input-group {
         width: 100%;
     }
 
-    table {
+    table, th, td {
         font-size: 0.9rem;
+        padding: 10px;
     }
 
-    .logout-button {
-        position: static;
-        margin-top: 10px;
-    }
-
-    .language-switch {
-        position: static;
-        margin-top: 10px;
-        justify-content: center;
+    .logout-button, .language-switch {
+        bottom: 10px;
+        padding: 8px 10px;
     }
 }
