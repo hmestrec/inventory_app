@@ -90,13 +90,13 @@ form {
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     margin-bottom: 30px;
-    width: 900px;
+    width: 100%; /* Full width on smaller screens */
     animation: fadeIn 0.5s ease;
 }
 
 .input-group {
     margin-bottom: 15px;
-    width: 800px;
+    width: 100%; /* Full width for input fields */
 }
 
 label {
@@ -302,4 +302,59 @@ tr:hover {
 
 input:focus::placeholder {
     color: #58ac28;
+}
+
+/* Responsive Styling for Smaller Screens */
+@media (max-width: 768px) {
+    .navigation {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .navigation ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .navigation li {
+        margin: 10px;
+    }
+
+    .navigation a {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+        width: auto;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 10px;
+    }
+
+    form {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    .logout-button {
+        position: static;
+        margin-top: 10px;
+    }
+
+    .language-switch {
+        position: static;
+        margin-top: 10px;
+        justify-content: center;
+    }
 }
