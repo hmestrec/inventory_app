@@ -14,45 +14,63 @@ body {
 
 /* Sidebar Navigation */
 .sidebar {
-    width: 200px;
-    background-color: #333; /* Dark gray */
+    width: 220px;
+    background-color: #333; /* Dark gray for sidebar */
     height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
     padding-top: 20px;
+    color: #ffffff;
+}
+
+.sidebar h2 {
+    color: #ff9800; /* Bright orange for sidebar title */
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.5rem;
 }
 
 .sidebar ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .sidebar ul li {
-    margin: 20px 0;
+    margin-bottom: 15px;
 }
 
 .sidebar ul li a {
-    color: #ff9800; /* Bright orange for links */
+    color: #ffffff;
     text-decoration: none;
-    padding: 10px 20px;
     display: block;
+    padding: 15px 20px;
     transition: background-color 0.3s ease;
 }
 
 .sidebar ul li a:hover {
-    background-color: #555; /* Slightly lighter gray on hover */
+    background-color: #555; /* Lighter gray on hover */
 }
 
 .sidebar ul li a.active {
-    background-color: #444; /* Slightly darker gray for active links */
+    background-color: #444; /* Darker gray for active link */
+}
+
+/* Admin Link Visibility */
+#admin-link {
+    display: none;
+}
+
+#admin-link.active {
+    display: block;
 }
 
 /* Main Content Area */
 .dashboard-content {
-    margin-left: 220px; /* Space for sidebar */
+    margin-left: 240px; /* Space for sidebar */
     padding: 20px;
-    width: calc(100% - 220px);
+    width: calc(100% - 240px);
 }
 
 /* Header Styling */
@@ -63,6 +81,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .header h1 {
@@ -98,15 +117,6 @@ body {
 .dashboard-content p {
     font-size: 1em;
     color: #bbbbbb;
-}
-
-/* Admin Link Visibility */
-#admin-link {
-    display: none;
-}
-
-#admin-link.active {
-    display: block;
 }
 
 /* Button Styling */
