@@ -326,18 +326,25 @@ input:focus::placeholder {
     .navigation ul {
         display: flex;
         width: 100%;
-        justify-content: space-around;
+        justify-content: space-between; /* Adjust spacing for fit */
     }
 
     .navigation li {
         margin: 0;
+        flex: 1; /* Equal space for each tab */
+        text-align: center;
     }
 
     .navigation a {
-        width: auto;
-        padding: 10px 15px;
+        padding: 10px 0;
         font-size: 0.9rem;
         text-align: center;
+        border-left: none; /* Remove border on hover */
+    }
+
+    /* Remove checkmark for smaller screens */
+    .navigation a.active::after {
+        content: none;
     }
 
     /* Adjust main content to move below navigation bar */
