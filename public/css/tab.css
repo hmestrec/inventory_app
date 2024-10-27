@@ -11,6 +11,7 @@ body {
     color: #f0f0f0;
     display: flex;
     animation: fadeIn 0.5s ease;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 /* Navigation Bar Styling */
@@ -314,32 +315,22 @@ input:focus::placeholder {
 
     .navigation ul {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .navigation li {
-        margin: 10px;
+        flex-direction: row;
+        justify-content: space-around;
     }
 
     .navigation a {
+        padding: 10px;
         font-size: 0.9rem;
-        padding: 10px 15px;
-        width: auto;
     }
 
     .main-content {
         margin-left: 0;
         width: 100%;
-        padding: 10px;
-    }
-
-    form {
-        width: 100%;
         padding: 15px;
     }
 
-    .input-group {
+    form, .input-group {
         width: 100%;
     }
 
