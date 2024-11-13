@@ -93,38 +93,31 @@ app.post('/login', (req, res) => {
   });
 });
 
-// REGISTER ROUTE
-app.post('/register', (req, res) => {
-    const { email, password } = req.body;
+// Registration route
+app.post('/register', async (req, res) => {
+    const { companyName, email, password } = req.body;
 
-    if (!email || !password) {
-        return res.status(400).json({ message: 'All fields are required' });
+    try {
+        // Check if the company already exists
+        let companyResult = await pool.query('SELECT id FROM companies WHERE name = ?', [companyName]);
+        let companyId;
+
+        if (companyResult.length === 0) {
+            // Create a new company
+            const newCompanyResult = await pool.query('INSERT INTO companies (name) VALUES (?)', [companyName]);
+            companyId = newCompanyResult.insertId;
+        } else {
+            companyId = companyResult[0].id;
+        }
+
+        // Create a new user associated with the company
+        const userResult = await pool.query('INSERT INTO users (email, password, company_id) VALUES (?, ?, ?)', [email, password, companyId]);
+
+        res.status(201).json({ userId: userResult.insertId });
+    } catch (error) {
+        console.error('Error during registration:', error);
+        res.status(500).json({ error: 'Registration failed' });
     }
-
-    const checkQuery = 'SELECT * FROM new_users WHERE email = ?';
-    pool.query(checkQuery, [email], (err, results) => {
-        if (err) {
-            return res.status(500).json({ error: 'Database error' });
-        }
-
-        if (results.length > 0) {
-            return res.status(400).json({ message: 'User already exists' });
-        }
-
-        bcrypt.hash(password, 10, (err, hash) => {
-            if (err) {
-                return res.status(500).json({ error: 'Error hashing password' });
-            }
-
-            const insertQuery = 'INSERT INTO new_users (email, password, role) VALUES (?, ?, ?)';
-            pool.query(insertQuery, [email, hash, 'user'], (err) => {
-                if (err) {
-                    return res.status(500).json({ error: 'Error registering user' });
-                }
-                res.status(201).json({ message: 'User registered successfully' });
-            });
-        });
-    });
 });
 
 // USER MANAGEMENT ROUTES
