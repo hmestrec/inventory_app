@@ -103,7 +103,7 @@ app.post('/register', async (req, res) => {
         let companyId;
 
         if (companyResult[0].length === 0) {
-            // Create a new company
+            // Create a new company if it doesn't exist
             const newCompanyResult = await pool.promise().query('INSERT INTO companies (name) VALUES (?)', [companyName]);
             companyId = newCompanyResult[0].insertId;
         } else {
@@ -113,12 +113,15 @@ app.post('/register', async (req, res) => {
         // Hash the password before storing it
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Create a new user associated with the company
-        const userResult = await pool.promise().query('INSERT INTO users (email, password, company_id) VALUES (?, ?, ?)', [email, hashedPassword, companyId]);
+        // Insert a new user into the new_users table associated with the company
+        const userResult = await pool.promise().query(
+            'INSERT INTO new_users (email, password, company_id) VALUES (?, ?, ?)', 
+            [email, hashedPassword, companyId]
+        );
 
         res.status(201).json({ userId: userResult[0].insertId });
     } catch (error) {
-        console.error('Error during registration:', error); // Log the full error details
+        console.error('Error during registration:', error); // Log full error details
         res.status(500).json({ error: 'Registration failed', details: error.message });
     }
 });
