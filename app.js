@@ -99,21 +99,24 @@ app.post('/register', async (req, res) => {
 
     try {
         // Check if the company already exists
-        let companyResult = await pool.query('SELECT id FROM companies WHERE name = ?', [companyName]);
+        let companyResult = await pool.promise().query('SELECT id FROM companies WHERE name = ?', [companyName]);
         let companyId;
 
-        if (companyResult.length === 0) {
+        if (companyResult[0].length === 0) {
             // Create a new company
-            const newCompanyResult = await pool.query('INSERT INTO companies (name) VALUES (?)', [companyName]);
-            companyId = newCompanyResult.insertId;
+            const newCompanyResult = await pool.promise().query('INSERT INTO companies (name) VALUES (?)', [companyName]);
+            companyId = newCompanyResult[0].insertId;
         } else {
-            companyId = companyResult[0].id;
+            companyId = companyResult[0][0].id;
         }
 
-        // Create a new user associated with the company
-        const userResult = await pool.query('INSERT INTO users (email, password, company_id) VALUES (?, ?, ?)', [email, password, companyId]);
+        // Hash the password before storing it
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-        res.status(201).json({ userId: userResult.insertId });
+        // Create a new user associated with the company
+        const userResult = await pool.promise().query('INSERT INTO users (email, password, company_id) VALUES (?, ?, ?)', [email, hashedPassword, companyId]);
+
+        res.status(201).json({ userId: userResult[0].insertId });
     } catch (error) {
         console.error('Error during registration:', error);
         res.status(500).json({ error: 'Registration failed', details: error.message });
