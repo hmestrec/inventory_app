@@ -118,10 +118,11 @@ app.post('/register', async (req, res) => {
 
         res.status(201).json({ userId: userResult[0].insertId });
     } catch (error) {
-        console.error('Error during registration:', error);
+        console.error('Error during registration:', error); // Log the full error details
         res.status(500).json({ error: 'Registration failed', details: error.message });
     }
 });
+
 
 // USER MANAGEMENT ROUTES
 app.get('/users', (req, res) => {
