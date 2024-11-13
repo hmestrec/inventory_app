@@ -1,13 +1,14 @@
 document.getElementById('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    const company = document.getElementById('company').value.trim();
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
     const loginError = document.getElementById('login-error');
 
     loginError.textContent = ''; // Clear any previous error messages
 
-    if (!email || !password) {
+    if (!company || !email || !password) {
         loginError.textContent = 'All fields are required';
         return;
     }
@@ -18,7 +19,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         const response = await fetch('https://sheltered-ocean-88352-000ba16da54d.herokuapp.com/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ company, email, password })
         });
 
         console.log("Received response with status:", response.status);
